@@ -2,8 +2,15 @@ import 'package:flutter/material.dart';
 
 import 'splashScreen/splash_screen.dart';
 
-Future<void> main() async{
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -16,12 +23,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Sellers App',
       theme: ThemeData(
-        
         primarySwatch: Colors.blue,
       ),
       home: const MySplashScreen(),
     );
   }
 }
-
-

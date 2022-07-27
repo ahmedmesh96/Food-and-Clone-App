@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "472414436456",
+    "project_id": "food-and-clone-app",
+    "storage_bucket": "food-and-clone-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:472414436456:android:1784d3de302a5494f98fdd",
+        "android_client_info": {
+          "package_name": "com.ahmedjasim.sellersapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "472414436456-k1n2s60rrr634knroo1gr6v46djuh179.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD5IX9as_qwtnZwIpJOE8Q53elUuI85l6U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "472414436456-k1n2s60rrr634knroo1gr6v46djuh179.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
