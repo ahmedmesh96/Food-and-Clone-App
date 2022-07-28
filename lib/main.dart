@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:sellers_app/global/global.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'splashScreen/splash_screen.dart';
 
@@ -10,6 +12,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  sharedPreferences = await SharedPreferences.getInstance();
+
+
   await Firebase.initializeApp();
   runApp(const MyApp());
 }

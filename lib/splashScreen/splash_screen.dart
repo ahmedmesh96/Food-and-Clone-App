@@ -2,6 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:sellers_app/authentication/auth_screen.dart';
+import 'package:sellers_app/authentication/register.dart';
+import 'package:sellers_app/global/global.dart';
+import 'package:sellers_app/mainScreens/home_screen.dart';
 
 class MySplashScreen extends StatefulWidget {
   const MySplashScreen({Key? key}) : super(key: key);
@@ -14,8 +17,29 @@ class _MySplashScreenState extends State<MySplashScreen> {
 
 
   startTimer(){
-    Timer(const Duration(seconds: 3), () async {
-      Navigator.push(context, MaterialPageRoute(builder: (c)=> const AuthScreen()));
+
+    
+
+
+    Timer(const Duration(seconds: 1), () async {
+
+      // if selle is loggedin already or not
+
+      if(firebaseAuth.currentUser != null){
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (c)=> const HomeScreen()));
+
+
+      // if selle is not loggedin already or not
+
+
+      } else {
+
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (c)=> const AuthScreen()));
+
+      }
+
+
+      
     });
   }
 
