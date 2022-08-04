@@ -275,7 +275,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       style: TextStyle(color: Colors.white),
                     ),
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.amber,
+                      backgroundColor: Colors.amber,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30)),
                     ),
@@ -292,7 +292,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               formValidation();
             },
             style: ElevatedButton.styleFrom(
-              primary: Colors.cyanAccent,
+              backgroundColor: Colors.cyanAccent,
               padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 10),
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30)),

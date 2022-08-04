@@ -1,25 +1,30 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:sellers_app/authentication/auth_screen.dart';
-import 'package:sellers_app/uploadScreens/menus_upload_screen.dart';
-import 'package:sellers_app/widgets/info_design.dart';
-import 'package:sellers_app/widgets/my_drawer.dart';
-import 'package:sellers_app/widgets/progress_bar.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:sellers_app/model/items.dart';
+import 'package:sellers_app/uploadScreens/items_upload_screen.dart';
+import 'package:sellers_app/widgets/items_design.dart';
+import 'package:sellers_app/widgets/my_drawer.dart';
 import 'package:sellers_app/widgets/text_widget_header.dart';
 
 import '../global/global.dart';
 import '../model/menus.dart';
+import '../uploadScreens/menus_upload_screen.dart';
+import '../widgets/info_design.dart';
+import '../widgets/progress_bar.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+
+
+
+class ItemsScreen extends StatefulWidget {
+  final Menus? model;
+  ItemsScreen({ this.model});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<ItemsScreen> createState() => _ItemsScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _ItemsScreenState extends State<ItemsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,7 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
           sharedPreferences!.getString(
             "name",
           )!,
-          style: const TextStyle(fontSize: 30, fontFamily: "Lobster"),
+          style: const TextStyle(fontSize: 30, ),
         ),
         centerTitle: true,
         automaticallyImplyLeading: true,
@@ -47,27 +52,26 @@ class _HomeScreenState extends State<HomeScreen> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (c) => const MenusUploadScreen()));
+                        builder: (c) =>  ItmesUploadScreen(
+                          model: widget.model
+                        )));
               },
               icon: const Icon(
-                Icons.post_add,
+                Icons.library_add,
                 color: Colors.cyan,
               ))
         ],
       ),
-      drawer: const MyDrawer(),
+      drawer: MyDrawer(),
+
       body: CustomScrollView(
         slivers: [
-          SliverPersistentHeader(
-            delegate: TextWidgetHeader(title: "My Menus"),
-            pinned: true,
-          ),
+          SliverPersistentHeader(pinned: true, delegate: TextWidgetHeader(title: "My" + widget.model!.menuTitle.toString() + "Items")),
           StreamBuilder<QuerySnapshot>(
               stream: FirebaseFirestore.instance
                   .collection("sellers")
                   .doc(sharedPreferences!.getString("uid"))
-                  .collection("menus")
-                  .orderBy("punlishedDate", descending: true)
+                  .collection("menus").doc(widget.model!.menuID).collection("items")
                   .snapshots(),
               builder: (context, snapshot) {
                 return !snapshot.hasData
@@ -78,11 +82,11 @@ class _HomeScreenState extends State<HomeScreen> {
                         crossAxisCount: 1,
                         staggeredTileBuilder: (c) => StaggeredTile.fit(1),
                         itemBuilder: (context, index) {
-                          Menus model = Menus.fromJson(
+                          Items model = Items.fromJson(
                             snapshot.data!.docs[index].data()!
                                 as Map<String, dynamic>,
                           );
-                          return InfoDesignWidget(
+                          return ItemsDesignWidget(
                             model: model,
                             context: context,
                           );
